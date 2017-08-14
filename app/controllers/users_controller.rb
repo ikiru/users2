@@ -17,6 +17,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @User.firn(params[:id])
+  end
+
+  def update
+    if @user.update user_params
+      redirect_to "/users/#{@user.id}"
+    else
+      flash[:errors] = @user.errors.full_messages
+      redirect_to "/users/#{@user.id}/edit"
+    end
   end
 
   private
