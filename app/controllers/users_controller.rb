@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def create_user
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def delete
-    #code
-  end
+  private
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
 end
