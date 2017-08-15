@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'secrets/index'
+
   get 'sessions/new'
 
   get 'sessions/show'
