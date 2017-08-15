@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  before_action :auth, only: [:show]
-
   def new
   end
 
@@ -8,19 +6,23 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def create_user
-    if params[:id !=nil]
-      @user = User.find(params[:id])
+  def edit
+    @user = User.find(params[:id])
+
+  end
+
+  def create
+    @user = User.new user_params
+    if @user.save
+      redirect_to "/sessions/new"
     else
-      @user = User.new(user_params)
+      flash[:errors] = @user.errors.full_messages
+      redirect_to "/users/new"
     end
   end
 
-  def edit
-    @User.firn(params[:id])
-  end
-
   def update
+    @user = User.find(params[:id])
     if @user.update user_params
       redirect_to "/users/#{@user.id}"
     else
@@ -29,7 +31,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      reset_session
+      redirect_to "/users/new"
+    else
+      redirect_to "/users/#{@user.id}/edit"
+    end
+  end
+
   private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
 end
