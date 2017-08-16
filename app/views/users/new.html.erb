@@ -1,8 +1,28 @@
-<form action="/user" method="post">
+<h1> Welcome to Dojo Secrets</h1>
+
+<div class="container">
+<form action="/users" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="text" id="Name" name = "user[name]">
-  <input type="text" id="Email" name = "user[email]">
-  <input type="text" id="Password" name = "user[password]">
-  <input type="text" id="Password_Confirmation" name = "user[password_confirmation]">
+  <div class="">
+    <span class="label">Name: </span>
+    <input type="text" id="Name" name = "user[name]">
+  </div>
+
+  <div class="">
+    <span class="label">Email: </span>
+    <input type="text" id="Email" name = "user[email]">
+  </div>
+
+  <div class="">
+    <span class="label">Password: </span>
+    <input type="text" id="Password" name = "user[password]">
+  </div>
+
+  <div class="">
+    <span class="label">Confirm Password: </span>
+      <input type="text" id="Password_Confirmation" name = "user[password_confirmation]">
+  </div>
+
   <input type="submit" name="Join" value="Join">
 </form>
+</div>
